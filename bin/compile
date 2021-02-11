@@ -24,3 +24,8 @@ apt-get install docker-ce docker-ce-cli containerd.io
 docker --version
 
 echo "-----> Docker installed!"
+
+
+# Docker download url:
+# echo "-----> Using docker CLI $DOCKER_VERSION"
+# curl -s https://download.docker.com/linux/static/stable/x86_64/docker-docker-18.06.3-ce.tgz -o $LOCAL_DOCKER_TGZ
