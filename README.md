@@ -1,2 +1,2 @@
 # docker-image-buildpack
-Simple Heroku buildpack to deploy a Docker image
+Simple Heroku buildpack to have Docker runtime engine available
