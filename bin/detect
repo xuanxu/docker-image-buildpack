@@ -1,4 +1,3 @@
 #!/usr/bin/env bash
-
-docker -v
+echo "docker 18.06.3-CE"
 exit 0
