@@ -26,6 +26,9 @@ chmod 755 $VENDOR_DIR/docker/*
 mkdir -p $VENDOR_DIR/docker-data
 mkdir -p $VENDOR_DIR/run
 mkdir -p $VENDOR_DIR/run/docker-exec
+chmod 777 $VENDOR_DIR/docker-data
+chmod 777 $VENDOR_DIR/run
+chmod 777 $VENDOR_DIR/run/docker-exec
 
 # Writing profile script to add binary dir to PATH
 echo "     > Setting PATH"
