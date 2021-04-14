@@ -9,29 +9,33 @@ DOCKER_VERSION=18.06.3-ce
 
 echo "-----> Installing Docker $DOCKER_VERSION"
 
-echo "     > Creating directories"
+echo "       - Creating directories"
 mkdir -p $CACHE_DIR $VENDOR_DIR
 
 LOCAL_DOCKER_TGZ=$CACHE_DIR/docker-$DOCKER_VERSION.tgz
 rm -f $LOCAL_DOCKER_TGZ
 
-echo "     > Downloading Docker"
+echo "       - Downloading Docker"
 [ -e $LOCAL_DOCKER_TGZ ] || curl -s https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKER_VERSION}.tgz -o $LOCAL_DOCKER_TGZ
 
-echo "     > Untar: creating vendor/docker"
+echo "       - Untar: creating vendor/docker"
 tar -zxf $LOCAL_DOCKER_TGZ -C $VENDOR_DIR
 chmod 755 $VENDOR_DIR/docker/*
 
-# Create dirs for the Docker daemon
+# Creating config for the Docker daemon
+echo "       - Setting up dockerd"
 mkdir -p $VENDOR_DIR/docker-data
 mkdir -p $VENDOR_DIR/run
 mkdir -p $VENDOR_DIR/run/docker-exec
+
 chmod 777 $VENDOR_DIR/docker-data
 chmod 777 $VENDOR_DIR/run
 chmod 777 $VENDOR_DIR/run/docker-exec
 
+export DOCKER_HOST="unix://$VENDOR_DIR/run/docker.sock"
+
 # Writing profile script to add binary dir to PATH
-echo "     > Setting PATH"
+echo "       - Setting PATH"
 mkdir -p $BUILD_DIR/.profile.d
 cat <<EOF >$BUILD_DIR/.profile.d/docker-path.sh
 export PATH="\$HOME/vendor/docker:\$PATH"
