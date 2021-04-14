@@ -33,6 +33,10 @@ chmod 777 $VENDOR_DIR/run
 chmod 777 $VENDOR_DIR/run/docker-exec
 
 export DOCKER_HOST="unix://$VENDOR_DIR/run/docker.sock"
+mkdir -p $BUILD_DIR/.profile.d
+cat <<EOF >$BUILD_DIR/.profile.d/docker-socket.sh
+export DOCKER_HOST="unix://\$VENDOR_DIR/run/docker.sock"
+EOF
 
 # Writing profile script to add binary dir to PATH
 echo "       - Setting PATH"
