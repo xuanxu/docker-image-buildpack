@@ -22,6 +22,11 @@ echo "     > Untar: creating vendor/docker"
 tar -zxf $LOCAL_DOCKER_TGZ -C $VENDOR_DIR
 chmod 755 $VENDOR_DIR/docker/*
 
+# Create dirs for the Docker daemon
+mkdir -p $VENDOR_DIR/docker-data
+mkdir -p $VENDOR_DIR/run
+mkdir -p $VENDOR_DIR/run/docker-exec
+
 # Writing profile script to add binary dir to PATH
 echo "     > Setting PATH"
 mkdir -p $BUILD_DIR/.profile.d
